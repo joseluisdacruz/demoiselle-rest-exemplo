@@ -3,18 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Exemplo</title>
+<style type="text/css">
+.required {
+	border-color: red;
+}
+</style>
 </head>
 <body>
 	<form>
 		<input id="a" type="number">
-		+
+		<span id="a-message"></span>
+		+ 
 		<input id="b" type="number">
+		<span id="b-message"></span>
 		=
 		<input id="result" type="number" readonly="readonly">
 		<button id="sum" type="submit">Somar</button>
 	</form>
-	
-	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+	<script type="text/javascript"
+		src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="calculator.js"></script>
 	<script type="text/javascript" src="index.js"></script>
 </body>

@@ -1,23 +1,29 @@
 $(function(){
 	$("form").submit(function (event) {
 		event.preventDefault();
+		$(".required").removeClass("required");
+		$("span").empty();
+		$("#result").val("");
 		
 		var data = {
 			a: $("#a").val(),
 			b: $("#b").val()
 		};
 		
-		var settings = {
-				url: 'api/calculator/sum',
-				type: 'POST',
-				data: JSON.stringify(data),
-				contentType: 'application/json'
-		};
-		
-		Calculator.sum(data).done(sumOk);
+		Calculator.sum(data).done(sumOk).fail(sumFailed);
 	});
 });
 
 function sumOk(data) {
 	$("#result").val(data);
+}
+
+function sumFailed(jqXHR) {
+	if (jqXHR.status == 422) {
+		var data = JSON.parse(jqXHR.responseText);
+		$.each(data, function(index, value) {
+			$("#" + value.property).addClass("required");
+			$("#" + value.property + "-message").text(value.message);
+		}); 
+	}
 }
